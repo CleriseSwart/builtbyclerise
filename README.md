@@ -4,7 +4,7 @@ The portfolio of **Clérise Swart**, software engineer. The site is part of the 
 repository is meant to be read.
 
 **Stack:** Vue 3 (`<script setup lang="ts">`), TypeScript (strict), Vite, vite-ssg, Tailwind CSS v4,
-vue-i18n, Unhead, TresJS, Vitest. Hosted on Cloudflare Pages as a static site.
+vue-i18n, Unhead, Vitest. Hosted on Cloudflare Pages.
 
 ## What it does
 
@@ -25,6 +25,10 @@ vue-i18n, Unhead, TresJS, Vitest. Hosted on Cloudflare Pages as a static site.
   the 3D chunk loads after the page has loaded, pauses off screen and respects reduced motion.
 - **Content as typed data.** Case studies, the timeline and skills live in `src/content/` as
   `Localized<T>` objects, so a missing Afrikaans version is a compile error.
+- **A contact form without a backend server.** A Cloudflare Pages Function (`functions/api/contact.ts`)
+  checks a Turnstile token, validates with the same rules as the form (`src/contact/validate.ts`) and
+  sends the message through Resend. The handler is plain TypeScript with an injectable `fetch`, so it
+  is unit-tested without Cloudflare.
 
 ## Structure
 
@@ -36,12 +40,14 @@ src/
   i18n/                en.json (schema) and af.json
   layouts/             SiteLayout: header, language toggle, footer
   pages/               one component per route
-  components/          ProjectCard (the case-study "deck"), LanguageToggle, CardArt, …
+  components/          ProjectCard (the case-study "deck"), ContactForm, LanguageToggle, …
   composables/         usePageMeta (title, description, OG, canonical, hreflang), useLocalePath,
                        usePersonSchema (JSON-LD)
   content/             case studies, timeline, skills (typed, both languages)
+  contact/             form validation and the contact endpoint handler
   hero/                the embroidery-machine hero (state, geometry, TresJS scene)
   utils/satin.ts       satin-stitch geometry
+functions/api/         Cloudflare Pages Functions (POST /api/contact)
 public/                favicon, robots.txt, Cloudflare _redirects and _headers
 ```
 
@@ -64,5 +70,18 @@ Requires Node 24.
 ## Deployment
 
 Cloudflare Pages builds `main` on every push: build command `npm run build`, output directory
-`dist`. The site is fully static; `public/_redirects` and `public/_headers` handle redirects and
-security headers. GitHub Actions runs the same checks on every push and pull request.
+`dist`. GitHub Actions runs the same checks on every push and pull request.
+
+Environment variables (Cloudflare Pages > Settings > Variables):
+
+| Name                      | Where    | What                                    |
+| ------------------------- | -------- | --------------------------------------- |
+| `VITE_TURNSTILE_SITE_KEY` | build    | Turnstile site key (public)             |
+| `TURNSTILE_SECRET_KEY`    | function | Turnstile secret                        |
+| `RESEND_API_KEY`          | function | Resend API key                          |
+| `CONTACT_FROM`            | function | Sender on a domain verified with Resend |
+| `CONTACT_TO`              | function | Inbox that receives the messages        |
+
+Locally, copy `.env.example` to `.env.local` and `.dev.vars.example` to `.dev.vars`, then run
+`npm run build && npx wrangler pages dev dist` to try the form end to end. Without them the form
+uses Cloudflare's always-pass Turnstile test key.

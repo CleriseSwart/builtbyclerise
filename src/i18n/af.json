@@ -117,11 +117,32 @@
   },
   "contact": {
     "heading": "Sê hallo",
-    "intro": "Of dit nou oor 'n rol, 'n projek of sommer net 'n geselsie gaan, e-pos is die vinnigste manier om my te bereik. Ek lees elke boodskap en antwoord binne 'n paar werksdae.",
-    "email": "E-pos",
+    "intro": "Of dit nou oor 'n rol, 'n projek of sommer net 'n geselsie gaan: stuur hier 'n boodskap of e-pos my direk. Ek lees elke boodskap en antwoord binne 'n paar werksdae.",
+    "name": "Jou naam",
+    "email": "Jou e-pos",
+    "topic": "Waaroor gaan dit?",
+    "topics": {
+      "work": "'n Werk",
+      "project": "'n Projek",
+      "chat": "Net gesels"
+    },
+    "message": "Boodskap",
+    "send": "Stuur boodskap",
+    "sending": "Stuur tans…",
+    "sent": "Dankie! Jou boodskap is op pad, en ek antwoord binnekort.",
+    "errors": {
+      "required": "Vul dit asseblief in.",
+      "invalid": "Dit lyk nie soos 'n e-posadres nie.",
+      "tooLong": "Dit is te lank.",
+      "captcha": "Die strooiposkontrole het nie deurgegaan nie. Probeer asseblief weer.",
+      "send": "Jou boodskap kon nie gestuur word nie. Probeer asseblief binne 'n oomblik weer.",
+      "network": "Geen verbinding nie. Kyk jou internet en probeer weer."
+    },
+    "elsewhereLabel": "Of direk",
+    "where": "Suid-Afrika · remote · SAST (UTC+2)",
+    "emailLabel": "E-pos",
     "copy": "Kopieer",
-    "copied": "Gekopieer",
-    "where": "Suid-Afrika · remote · SAST (UTC+2)"
+    "copied": "Gekopieer"
   },
   "notFound": {
     "title": "Hierdie steek het verdwaal.",

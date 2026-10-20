@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
+import ContactForm from '@/components/ContactForm.vue'
 import { usePageMeta } from '@/composables/usePageMeta'
 import { EMAIL, GITHUB_URL, LINKEDIN_URL } from '@/content/career'
 
@@ -26,42 +27,44 @@ async function copyEmail() {
 </script>
 
 <template>
-  <div class="grid max-w-3xl gap-12 pt-12 sm:pt-20">
-    <header class="grid max-w-[60ch] gap-4">
-      <h1 class="text-[clamp(2.75rem,6vw,4.5rem)] leading-[0.95] font-[750] [font-stretch:82%]">
-        {{ t('contact.heading') }}
-      </h1>
-      <p class="text-lg text-fog">{{ t('contact.intro') }}</p>
-    </header>
+  <div class="grid gap-16 pt-12 sm:pt-20 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
+    <section class="grid content-start gap-10">
+      <header class="grid max-w-[60ch] gap-4">
+        <h1 class="text-[clamp(2.75rem,6vw,4.5rem)] leading-[0.95] font-[750] [font-stretch:82%]">
+          {{ t('contact.heading') }}
+        </h1>
+        <p class="text-lg text-fog">{{ t('contact.intro') }}</p>
+      </header>
+      <ContactForm />
+    </section>
 
-    <section class="grid gap-3 rounded-2xl border border-seam bg-cloth p-6 sm:p-8">
-      <p class="label">{{ t('contact.email') }}</p>
-      <div class="flex flex-wrap items-center gap-4">
+    <aside class="grid content-start gap-4 lg:pt-40">
+      <p class="label">{{ t('contact.elsewhereLabel') }}</p>
+      <div class="grid gap-2 rounded-xl border border-seam bg-cloth p-4">
+        <span class="text-sm text-fog">{{ t('contact.emailLabel') }}</span>
         <a
           :href="`mailto:${EMAIL}`"
-          class="font-display text-[clamp(1.375rem,4vw,2.25rem)] font-semibold break-all text-thread underline-offset-4 hover:underline"
+          class="font-semibold break-all text-thread underline-offset-4 hover:underline"
         >
           {{ EMAIL }}
         </a>
-        <button type="button" class="btn-stitch text-sm" @click="copyEmail">
+        <button type="button" class="w-fit text-sm text-fog hover:text-chalk" @click="copyEmail">
           <span aria-live="polite">{{ copied ? t('contact.copied') : t('contact.copy') }}</span>
         </button>
       </div>
-    </section>
-
-    <ul class="grid gap-3 sm:grid-cols-2">
-      <li v-for="profile in profiles" :key="profile.href">
-        <a
-          :href="profile.href"
-          rel="noopener me"
-          class="grid rounded-xl border border-seam p-5 transition-colors hover:border-chalk"
-        >
-          <span class="text-lg font-semibold">{{ profile.label }}</span>
-          <span class="text-sm text-fog">{{ profile.handle }}</span>
-        </a>
-      </li>
-    </ul>
-
-    <p class="text-sm text-fog">{{ t('contact.where') }}</p>
+      <ul class="grid gap-3">
+        <li v-for="profile in profiles" :key="profile.href">
+          <a
+            :href="profile.href"
+            rel="noopener me"
+            class="grid rounded-xl border border-seam p-4 transition-colors hover:border-chalk"
+          >
+            <span class="font-semibold">{{ profile.label }}</span>
+            <span class="text-sm text-fog">{{ profile.handle }}</span>
+          </a>
+        </li>
+      </ul>
+      <p class="text-sm text-fog">{{ t('contact.where') }}</p>
+    </aside>
   </div>
 </template>

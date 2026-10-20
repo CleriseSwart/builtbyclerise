@@ -39,8 +39,10 @@ its source code have to prove her **Vue** skills.
   page there and in `src/router/routes.ts`; a test checks they match.
 - UI strings in `src/i18n/*.json` (en.json is the schema; `scripts/check-i18n.mjs` and vue-tsc fail on
   gaps). Long-form content in `src/content/*.ts` as `Localized<T>`.
-- No contact form (removed at her request, 2026-10-20): the Contact page lists her e-mail
-  (`EMAIL` in `src/content/career.ts`), LinkedIn and GitHub. The site has no server code.
+- Contact page: the form (Pages Function `functions/api/contact.ts` -> `src/contact/handler.ts`:
+  honeypot, Turnstile, then Resend to her Gmail) plus her e-mail (`EMAIL` in
+  `src/content/career.ts`), LinkedIn and GitHub. Secrets only in Cloudflare Pages variables (README).
+  Cloudflare Email Service was tried and dropped: Pages Functions can't use send_email.
 - Hero: `src/hero/` - `machine.ts` (pure, tested state), `stitchPath.ts`, `buildMachine.ts` (Three.js
   objects, stitches merged into two meshes revealed by draw range), `HoopScene.vue`/`HoopCanvas.vue`
   (TresJS), `HeroHoop.vue` (SVG stand-in in the prerendered HTML; 3D loads after `load` + idle).
