@@ -1,0 +1,151 @@
+{
+  "site": {
+    "name": "Built by Clérise",
+    "skipToContent": "Skip to content"
+  },
+  "nav": {
+    "label": "Main",
+    "home": "Home",
+    "work": "Work",
+    "about": "About",
+    "contact": "Contact",
+    "language": "Language",
+    "switchTo": "Lees in Afrikaans"
+  },
+  "meta": {
+    "home": {
+      "title": "Clérise Swart, software engineer",
+      "description": "Clérise Swart is a software engineer in South Africa: Vue and TypeScript on the front-end, full-stack when it counts, with businesses of her own."
+    },
+    "work": {
+      "title": "Work",
+      "description": "Case studies: rescuing legacy software for FEW Cutting Tools, a custom webshop for Embroidery Blanks, and team work at Sterrk."
+    },
+    "about": {
+      "title": "About",
+      "description": "From leading remote support teams to building the systems behind them: the story of Clérise Swart."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Get in touch with Clérise Swart about a full-time role, a project, or just to chat."
+    },
+    "notFound": {
+      "title": "Page not found",
+      "description": "This page does not exist."
+    }
+  },
+  "home": {
+    "eyebrow": "Software engineer · Creative · Business owner",
+    "lede": "I build the systems behind the work.",
+    "sub": "Vue and TypeScript on the front-end, full-stack when it counts. Ten-plus years of remote work, businesses of my own, and a machine that stitches whatever I program into it.",
+    "ctaWork": "See the work",
+    "ctaContact": "Say hello",
+    "status": "Open to full-time roles · South Africa / remote",
+    "workLabel": "Selected work",
+    "workHeading": "Two systems, built end to end",
+    "workAll": "All work",
+    "howLabel": "How I work",
+    "howHeading": "Software that fits the business it runs",
+    "how": {
+      "fitTitle": "Start from how people actually work",
+      "fitBody": "Seven years in customer support taught me where systems fail people. So I build for the real workflow: phone-only accounts when customers have no e-mail, a quote list when a shop has no prices yet.",
+      "proofTitle": "Typed, tested, checked",
+      "proofBody": "Strict TypeScript, tests next to the code, and CI that refuses a missing translation. This site is built the same way; the source is public.",
+      "docsTitle": "Write it down",
+      "docsBody": "Handover notes after every build session, a findings list instead of silent fixes, and documentation that carried a team through a change in leadership."
+    },
+    "aboutLabel": "About",
+    "aboutHeading": "From support lead to software engineer",
+    "aboutBody": "I spent years leading remote support teams for Amazon and AAA games before I moved into building the systems myself. Now I write Vue and TypeScript for a living, run my own businesses, and finish my BSc in Computer Science in December 2026.",
+    "aboutLink": "Read my story",
+    "contactHeading": "Hiring for Vue or full-stack?",
+    "contactBody": "I am looking for a full-time role, remote from South Africa. Intermediate level, with room to lead.",
+    "contactLink": "Get in touch"
+  },
+  "card": {
+    "stack": "Stack",
+    "ability": "Ability",
+    "read": "Read the case study"
+  },
+  "work": {
+    "heading": "Work",
+    "intro": "Two systems I designed and built end to end, the team work I did at Sterrk, and the smaller things on the side.",
+    "caseLabel": "Case studies",
+    "sterrkLabel": "At Sterrk",
+    "sterrkHeading": "Two years on a remote team in Amsterdam",
+    "sterrkIntro": "Client work stays with the clients, so these are descriptions only.",
+    "sideLabel": "On the side",
+    "sideHeading": "Smaller builds and the creative side",
+    "sideIntro": "Ask me if you would like to see any of it.",
+    "etsy": "Visit the Etsy shop"
+  },
+  "case": {
+    "role": "Role",
+    "status": "Status",
+    "stack": "Stack",
+    "links": "Links",
+    "notesHeading": "Engineering notes",
+    "demoNote": "The demo is behind a login. Ask me for access.",
+    "next": "Next case study",
+    "allWork": "All work"
+  },
+  "about": {
+    "heading": "Hello, I’m Clérise.",
+    "intro": "I think in systems. I am direct, practical, and happiest when I am solving a problem by building something.",
+    "story": "For seven years I worked in remote customer support: player support for AAA games, then managing an international e-commerce team of 20 at Amazon, then leading escalations for mobile game launches. I kept running into the same thing: the people were fine, the systems around them were not. So I learnt to build them. I finished HyperionDev's full-stack bootcamp early, at the top of my cohort, and spent two years as a full-stack developer for a team in Amsterdam.",
+    "business": "I also run my own businesses. HCreations Embroidery Blanks supplies blanks to embroiderers across South Africa; I run it with three women who work for me, and I rebuilt its shop myself. That mix of support, engineering and business is what I bring to a team: I know what the code is for.",
+    "photoAlt": "Clérise Swart",
+    "timelineLabel": "Timeline",
+    "timelineHeading": "How I got here",
+    "skillsLabel": "Skills",
+    "skillsHeading": "What I work with",
+    "toolsLabel": "Day to day",
+    "lookingLabel": "Looking for",
+    "lookingHeading": "What I want next",
+    "looking": {
+      "role": "A full-time role, not freelance.",
+      "level": "Intermediate level, front-end or full-stack, with Vue as my strongest tool. Roles that mix in tech lead or product work are welcome.",
+      "where": "Remote: South Africa or international, the Netherlands especially. My home office has backup power and a reliable connection."
+    },
+    "offLabel": "Off the clock",
+    "offHeading": "When I’m not building",
+    "offBody": "I keep a journal to spot patterns. I build Pokémon TCG decks. I play puzzle, exploration, builder and automation games, and I paint with watercolours.",
+    "cs2": "CS2? I like it. Or, well, no. But yes. But no."
+  },
+  "contact": {
+    "heading": "Say hello",
+    "intro": "Whether it is a role, a project or just a chat, I read every message and reply within a few working days.",
+    "name": "Your name",
+    "email": "Your e-mail",
+    "topic": "What is it about?",
+    "topics": {
+      "work": "A job",
+      "project": "A project",
+      "chat": "Just chatting"
+    },
+    "message": "Message",
+    "send": "Send message",
+    "sending": "Sending…",
+    "sent": "Thank you! Your message is on its way, and I will get back to you soon.",
+    "errors": {
+      "required": "Please fill this in.",
+      "invalid": "This does not look like an e-mail address.",
+      "tooLong": "This is too long.",
+      "captcha": "The spam check did not go through. Please try again.",
+      "send": "Your message could not be sent. Please try again in a moment.",
+      "network": "No connection. Check your internet and try again."
+    },
+    "elsewhereLabel": "Elsewhere",
+    "where": "South Africa · remote · SAST (UTC+2)"
+  },
+  "notFound": {
+    "title": "This stitch went astray.",
+    "body": "The page you are looking for does not exist.",
+    "back": "Back to the home page"
+  },
+  "footer": {
+    "builtWith": "Designed and built by Clérise with Vue 3 and TypeScript.",
+    "source": "Read the source",
+    "location": "South Africa · remote"
+  }
+}

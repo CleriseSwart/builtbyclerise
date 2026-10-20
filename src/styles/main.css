@@ -1,0 +1,117 @@
+@import '@fontsource-variable/bricolage-grotesque/standard.css';
+@import '@fontsource-variable/figtree/wght.css';
+@import '@fontsource-variable/martian-mono/wght.css';
+@import 'tailwindcss';
+
+/* Design direction "Stitched Systems": ink-navy linen, one raspberry thread. */
+@theme {
+  --color-ink: #0d1322; /* ground: midnight linen */
+  --color-cloth: #151d31; /* raised surface */
+  --color-seam: #27314b; /* lines, borders */
+  --color-fog: #a3acc4; /* secondary text */
+  --color-chalk: #efebe4; /* primary text: tailor's chalk */
+  --color-thread: #ff5c8a; /* the one accent */
+
+  --font-display: 'Bricolage Grotesque Variable', 'Arial Narrow', system-ui, sans-serif;
+  --font-sans: 'Figtree Variable', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'Martian Mono Variable', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    @apply bg-ink text-chalk font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    @apply outline-thread rounded-sm outline-2 outline-offset-4;
+  }
+
+  ::selection {
+    @apply bg-thread text-ink;
+  }
+}
+
+@utility label {
+  @apply text-fog font-mono text-[11px] tracking-[0.08em] uppercase;
+}
+
+/* A running stitch: the site's divider. */
+@utility stitch-rule {
+  height: 2px;
+  background: repeating-linear-gradient(90deg, var(--color-seam) 0 9px, transparent 9px 15px);
+}
+
+@utility btn-thread {
+  @apply bg-thread text-ink inline-flex rounded-full px-5 py-3 font-semibold transition-colors;
+  &:hover {
+    background: color-mix(in oklab, var(--color-thread) 85%, white);
+  }
+}
+
+/* A button framed by a running stitch that "runs" on hover. */
+@utility btn-stitch {
+  @apply text-chalk inline-flex px-5 py-3 font-semibold;
+  background:
+    linear-gradient(90deg, var(--color-fog) 50%, transparent 0) repeat-x 0 0 / 10px 1.5px,
+    linear-gradient(90deg, var(--color-fog) 50%, transparent 0) repeat-x 0 100% / 10px 1.5px,
+    linear-gradient(0deg, var(--color-fog) 50%, transparent 0) repeat-y 0 0 / 1.5px 10px,
+    linear-gradient(0deg, var(--color-fog) 50%, transparent 0) repeat-y 100% 0 / 1.5px 10px;
+  &:hover {
+    animation: stitch-run 0.6s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    &:hover {
+      animation: none;
+    }
+  }
+}
+
+@keyframes stitch-run {
+  to {
+    background-position:
+      10px 0,
+      -10px 100%,
+      0 -10px,
+      100% 10px;
+  }
+}
+
+@utility link-arrow {
+  @apply text-thread inline-flex w-fit items-center gap-2 font-semibold underline-offset-4 hover:underline;
+  &::after {
+    content: '→';
+  }
+}
+
+@utility status-dot {
+  @apply inline-flex items-center gap-2;
+  &::before {
+    content: '';
+    @apply size-2 rounded-full bg-[#5fd39a] shadow-[0_0_0_4px_rgb(95_211_154/0.15)];
+  }
+}
+
+/* List item marked with a short satin stitch in the thread colour. */
+@utility stitch-bullet {
+  @apply relative pl-6;
+  &::before {
+    content: '';
+    @apply bg-thread absolute top-[0.7em] left-0 h-[3px] w-3 -rotate-12 rounded-full;
+  }
+}
+
+@utility stitch-rule-top {
+  background: repeating-linear-gradient(90deg, var(--color-seam) 0 9px, transparent 9px 15px) top /
+    100% 2px no-repeat;
+}

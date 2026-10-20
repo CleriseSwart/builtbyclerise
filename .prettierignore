@@ -1,0 +1,8 @@
+dist
+dist-ssr
+coverage
+node_modules
+package-lock.json
+private
+.idea
+.vite-ssg-temp

@@ -1,0 +1,54 @@
+{
+  "name": "builtbyclerise",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Portfolio of Clérise Swart: builtbyclerise.co.za",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run i18n:check && vue-tsc --build && vite-ssg build",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "i18n:check": "node scripts/check-i18n.mjs",
+    "lint": "eslint . --fix",
+    "lint:check": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "npm run i18n:check && npm run typecheck && npm run lint:check && npm run format:check && npm test"
+  },
+  "dependencies": {
+    "@fontsource-variable/bricolage-grotesque": "^5.3.0",
+    "@fontsource-variable/figtree": "^5.3.0",
+    "@fontsource-variable/martian-mono": "^5.3.0",
+    "@unhead/vue": "^2.1.17",
+    "vue": "^3.5.44",
+    "vue-i18n": "^11.4.16",
+    "vue-router": "^4.6.4"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260702.1",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^24.13.3",
+    "@vitejs/plugin-vue": "^6.0.10",
+    "@vue/eslint-config-prettier": "^10.2.0",
+    "@vue/eslint-config-typescript": "^14.9.0",
+    "@vue/test-utils": "^2.5.1",
+    "@vue/tsconfig": "^0.9.1",
+    "beasties": "^0.3.5",
+    "eslint": "^10.13.0",
+    "eslint-plugin-vue": "^10.11.1",
+    "jsdom": "^28.0.0",
+    "prettier": "^3.9.10",
+    "tailwindcss": "^4.3.3",
+    "typescript": "~6.0.2",
+    "vite": "^8.3.4",
+    "vite-ssg": "^28.3.0",
+    "vitest": "^5.0.5",
+    "vue-tsc": "^3.3.13"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

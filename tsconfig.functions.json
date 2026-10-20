@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.functions.tsbuildinfo",
+    "target": "es2022",
+    "lib": ["ES2022"],
+    "types": ["@cloudflare/workers-types"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "verbatimModuleSyntax": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  },
+  "include": ["functions/**/*.ts", "src/contact/handler.ts", "src/contact/validate.ts"]
+}

@@ -1,0 +1,5 @@
+# Cloudflare Pages edge redirects. English is the default language.
+/          /en          302
+/work      /en/work     301
+/about     /en/about    301
+/contact   /en/contact  301

@@ -1,0 +1,22 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+.wrangler/
+.idea/workspace.xml
+.idea/shelf/
+*.log
+.DS_Store
+
+# Private source material (personal details, CV, originals) - never in the public repo
+private/
+
+# Build and test output
+dist-ssr/
+.vite-ssg-temp/
+coverage/
+.dev.vars
+
+# Personal notes for Claude (content rules that must stay private)
+CLAUDE.local.md

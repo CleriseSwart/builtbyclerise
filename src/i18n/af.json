@@ -1,0 +1,151 @@
+{
+  "site": {
+    "name": "Built by Clérise",
+    "skipToContent": "Gaan na die inhoud"
+  },
+  "nav": {
+    "label": "Hoof",
+    "home": "Tuis",
+    "work": "Werk",
+    "about": "Oor my",
+    "contact": "Kontak",
+    "language": "Taal",
+    "switchTo": "Read in English"
+  },
+  "meta": {
+    "home": {
+      "title": "Clérise Swart, sagteware-ingenieur",
+      "description": "Clérise Swart is 'n sagteware-ingenieur in Suid-Afrika: Vue en TypeScript aan die front-end, full-stack wanneer dit saak maak, met haar eie besighede."
+    },
+    "work": {
+      "title": "Werk",
+      "description": "Gevallestudies: ou sagteware gered vir FEW Cutting Tools, 'n pasgemaakte webwinkel vir Embroidery Blanks, en spanwerk by Sterrk."
+    },
+    "about": {
+      "title": "Oor my",
+      "description": "Van remote ondersteuningspanne lei tot die stelsels daaragter bou: die storie van Clérise Swart."
+    },
+    "contact": {
+      "title": "Kontak",
+      "description": "Kontak Clérise Swart oor 'n voltydse rol, 'n projek, of sommer net om te gesels."
+    },
+    "notFound": {
+      "title": "Bladsy nie gevind nie",
+      "description": "Hierdie bladsy bestaan nie."
+    }
+  },
+  "home": {
+    "eyebrow": "Sagteware-ingenieur · Kreatief · Besigheidseienaar",
+    "lede": "Ek bou die stelsels agter die werk.",
+    "sub": "Vue en TypeScript aan die front-end, full-stack wanneer dit saak maak. Meer as tien jaar remote, my eie besighede, en 'n masjien wat stik wat ek ook al daarin programmeer.",
+    "ctaWork": "Sien die werk",
+    "ctaContact": "Sê hallo",
+    "status": "Beskikbaar vir voltydse rolle · Suid-Afrika / remote",
+    "workLabel": "Gekose werk",
+    "workHeading": "Twee stelsels, van begin tot einde gebou",
+    "workAll": "Alle werk",
+    "howLabel": "Hoe ek werk",
+    "howHeading": "Sagteware wat pas by die besigheid wat dit dra",
+    "how": {
+      "fitTitle": "Begin by hoe mense regtig werk",
+      "fitBody": "Sewe jaar in klantediens het my geleer waar stelsels mense in die steek laat. Daarom bou ek vir die regte werkvloei: rekeninge met net 'n selnommer as kliënte nie e-pos het nie, 'n kwotasielys as 'n winkel nog nie pryse het nie.",
+      "proofTitle": "Getik, getoets, nagegaan",
+      "proofBody": "Streng TypeScript, toetse langs die kode, en CI wat 'n ontbrekende vertaling weier. Hierdie werf is op dieselfde manier gebou; die bronkode is publiek.",
+      "docsTitle": "Skryf dit neer",
+      "docsBody": "Oorhandigingsnotas ná elke bousessie, 'n bevindingelys in plaas van stil regmaakwerk, en dokumentasie wat 'n span deur 'n leierskapswisseling gedra het."
+    },
+    "aboutLabel": "Oor my",
+    "aboutHeading": "Van ondersteuningsleier tot sagteware-ingenieur",
+    "aboutBody": "Ek het jare lank remote ondersteuningspanne vir Amazon en AAA-speletjies gelei voordat ek self die stelsels begin bou het. Nou skryf ek Vue en TypeScript vir 'n lewe, bestuur my eie besighede, en voltooi my BSc in Rekenaarwetenskap in Desember 2026.",
+    "aboutLink": "Lees my storie",
+    "contactHeading": "Soek jy iemand vir Vue of full-stack?",
+    "contactBody": "Ek soek 'n voltydse rol, remote vanuit Suid-Afrika. Intermediêre vlak, met ruimte om te lei.",
+    "contactLink": "Kontak my"
+  },
+  "card": {
+    "stack": "Stack",
+    "ability": "Vermoë",
+    "read": "Lees die gevallestudie"
+  },
+  "work": {
+    "heading": "Werk",
+    "intro": "Twee stelsels wat ek van begin tot einde ontwerp en gebou het, die spanwerk wat ek by Sterrk gedoen het, en die kleiner dinge aan die kant.",
+    "caseLabel": "Gevallestudies",
+    "sterrkLabel": "By Sterrk",
+    "sterrkHeading": "Twee jaar in 'n remote span in Amsterdam",
+    "sterrkIntro": "Kliëntwerk bly by die kliënte, so hier is net beskrywings.",
+    "sideLabel": "Aan die kant",
+    "sideHeading": "Kleiner bouwerk en die kreatiewe kant",
+    "sideIntro": "Vra my gerus as jy iets daarvan wil sien.",
+    "etsy": "Besoek die Etsy-winkel"
+  },
+  "case": {
+    "role": "Rol",
+    "status": "Status",
+    "stack": "Stack",
+    "links": "Skakels",
+    "notesHeading": "Ingenieursnotas",
+    "demoNote": "Die demo is agter 'n aanmelding. Vra my vir toegang.",
+    "next": "Volgende gevallestudie",
+    "allWork": "Alle werk"
+  },
+  "about": {
+    "heading": "Hallo, ek is Clérise.",
+    "intro": "Ek dink in stelsels. Ek is direk en prakties, en die gelukkigste wanneer ek 'n probleem oplos deur iets te bou.",
+    "story": "Sewe jaar lank het ek in remote klantediens gewerk: spelerondersteuning vir AAA-speletjies, toe 'n internasionale e-handelspan van 20 by Amazon bestuur, en daarna eskalasies gelei vir die bekendstelling van selfoonspeletjies. Ek het telkens dieselfde ding raakgeloop: die mense was reg, die stelsels om hulle nie. Toe leer ek om dit te bou. Ek het HyperionDev se full-stack-bootcamp vroeg voltooi, boaan my groep, en twee jaar as full-stack-ontwikkelaar vir 'n span in Amsterdam gewerk.",
+    "business": "Ek bestuur ook my eie besighede. HCreations Embroidery Blanks verskaf blanks aan borduurders regoor Suid-Afrika; ek bestuur dit met drie dames wat vir my werk, en ek het die winkel self herbou. Daardie mengsel van ondersteuning, ingenieurswese en besigheid is wat ek na 'n span bring: ek weet waarvoor die kode is.",
+    "photoAlt": "Clérise Swart",
+    "timelineLabel": "Tydlyn",
+    "timelineHeading": "Hoe ek hier uitgekom het",
+    "skillsLabel": "Vaardighede",
+    "skillsHeading": "Waarmee ek werk",
+    "toolsLabel": "Elke dag",
+    "lookingLabel": "Op soek na",
+    "lookingHeading": "Wat ek volgende wil doen",
+    "looking": {
+      "role": "'n Voltydse rol, nie vryskutwerk nie.",
+      "level": "Intermediêre vlak, front-end of full-stack, met Vue as my sterkste gereedskap. Rolle met 'n bietjie tech lead- of produkwerk is welkom.",
+      "where": "Remote: Suid-Afrika of internasionaal, veral Nederland. My tuiskantoor het rugsteunkrag en 'n betroubare verbinding."
+    },
+    "offLabel": "Ná ure",
+    "offHeading": "As ek nie bou nie",
+    "offBody": "Ek hou 'n joernaal om patrone raak te sien. Ek bou Pokémon TCG-dekke. Ek speel puzzle-, exploration-, builder- en automation-speletjies, en ek skilder met waterverf.",
+    "cs2": "CS2? Ek hou daarvan. Of wel, nee. Maar ja. Maar nee."
+  },
+  "contact": {
+    "heading": "Sê hallo",
+    "intro": "Of dit nou oor 'n rol, 'n projek of sommer net 'n geselsie gaan, ek lees elke boodskap en antwoord binne 'n paar werksdae.",
+    "name": "Jou naam",
+    "email": "Jou e-pos",
+    "topic": "Waaroor gaan dit?",
+    "topics": {
+      "work": "'n Werk",
+      "project": "'n Projek",
+      "chat": "Net gesels"
+    },
+    "message": "Boodskap",
+    "send": "Stuur boodskap",
+    "sending": "Stuur tans…",
+    "sent": "Dankie! Jou boodskap is op pad, en ek antwoord binnekort.",
+    "errors": {
+      "required": "Vul dit asseblief in.",
+      "invalid": "Dit lyk nie soos 'n e-posadres nie.",
+      "tooLong": "Dit is te lank.",
+      "captcha": "Die strooiposkontrole het nie deurgegaan nie. Probeer asseblief weer.",
+      "send": "Jou boodskap kon nie gestuur word nie. Probeer asseblief binne 'n oomblik weer.",
+      "network": "Geen verbinding nie. Kyk jou internet en probeer weer."
+    },
+    "elsewhereLabel": "Elders",
+    "where": "Suid-Afrika · remote · SAST (UTC+2)"
+  },
+  "notFound": {
+    "title": "Hierdie steek het verdwaal.",
+    "body": "Die bladsy wat jy soek, bestaan nie.",
+    "back": "Terug na die tuisblad"
+  },
+  "footer": {
+    "builtWith": "Ontwerp en gebou deur Clérise met Vue 3 en TypeScript.",
+    "source": "Lees die bronkode",
+    "location": "Suid-Afrika · remote"
+  }
+}
