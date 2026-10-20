@@ -3,6 +3,8 @@ import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import LanguageToggle from '@/components/LanguageToggle.vue'
+import MobileMenu from '@/components/MobileMenu.vue'
+import ScrollToTop from '@/components/ScrollToTop.vue'
 import StitchMonogram from '@/components/StitchMonogram.vue'
 import { useLocalePath } from '@/composables/useLocalePath'
 
@@ -45,7 +47,10 @@ const links = computed(() => [
           {{ link.label }}
         </RouterLink>
       </nav>
-      <LanguageToggle class="ml-auto sm:ml-0" />
+      <LanguageToggle class="hidden sm:flex" />
+      <div class="ml-auto sm:hidden">
+        <MobileMenu :links="[{ to: path(), label: t('nav.home') }, ...links]" />
+      </div>
     </header>
 
     <main id="main" tabindex="-1" class="flex-1 focus:outline-none">
@@ -63,4 +68,6 @@ const links = computed(() => [
       </p>
     </footer>
   </div>
+
+  <ScrollToTop />
 </template>

@@ -10,7 +10,11 @@
     "about": "About",
     "contact": "Contact",
     "language": "Language",
-    "switchTo": "Lees in Afrikaans"
+    "switchTo": "Lees in Afrikaans",
+    "backToTop": "Back to top",
+    "menu": "Menu",
+    "openMenu": "Open the menu",
+    "closeMenu": "Close the menu"
   },
   "meta": {
     "home": {

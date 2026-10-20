@@ -10,7 +10,11 @@
     "about": "Oor my",
     "contact": "Kontak",
     "language": "Taal",
-    "switchTo": "Read in English"
+    "switchTo": "Read in English",
+    "backToTop": "Terug na bo",
+    "menu": "Kieslys",
+    "openMenu": "Maak die kieslys oop",
+    "closeMenu": "Maak die kieslys toe"
   },
   "meta": {
     "home": {

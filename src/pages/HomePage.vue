@@ -52,7 +52,7 @@ const principles = [
 
     <section class="grid gap-10">
       <SectionHeading :label="t('home.workLabel')" :heading="t('home.workHeading')" />
-      <div class="flex flex-wrap gap-6">
+      <div class="flex flex-wrap justify-center gap-6">
         <ProjectCard
           v-for="(study, i) in caseStudyList"
           :key="study.slug"
@@ -60,7 +60,9 @@ const principles = [
           :tilt="i % 2 ? 1.5 : -2"
         />
       </div>
-      <RouterLink :to="path('work')" class="link-arrow">{{ t('home.workAll') }}</RouterLink>
+      <RouterLink :to="path('work')" class="link-arrow justify-self-center">
+        {{ t('home.workAll') }}
+      </RouterLink>
     </section>
 
     <section class="grid gap-10">
