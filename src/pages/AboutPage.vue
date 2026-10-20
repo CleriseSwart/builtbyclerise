@@ -32,8 +32,8 @@ const looking = ['about.looking.role', 'about.looking.level', 'about.looking.whe
         <p class="max-w-[66ch] text-fog">{{ t('about.story') }}</p>
         <p class="max-w-[66ch] text-fog">{{ t('about.business') }}</p>
       </div>
-      <!-- Duotone in the site's ink and thread colours; the photo itself is a placeholder for now. -->
-      <div class="duotone mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-3xl">
+      <!-- The photo is a placeholder for now. -->
+      <div class="mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-3xl">
         <img
           :src="portrait"
           :alt="t('about.photoAlt')"
@@ -108,22 +108,6 @@ const looking = ['about.looking.role', 'about.looking.level', 'about.looking.whe
 </template>
 
 <style scoped>
-.duotone {
-  position: relative;
-  background: var(--color-thread);
-}
-.duotone img {
-  filter: grayscale(1) contrast(1.15) brightness(1.05);
-  mix-blend-mode: multiply;
-}
-.duotone::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--color-ink);
-  mix-blend-mode: lighten;
-}
-
 /* The timeline is a running stitch; engineering milestones get a satin-stitch knot. */
 .timeline li::before {
   content: '';
