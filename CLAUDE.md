@@ -39,8 +39,10 @@ its source code have to prove her **Vue** skills.
   page there and in `src/router/routes.ts`; a test checks they match.
 - UI strings in `src/i18n/*.json` (en.json is the schema; `scripts/check-i18n.mjs` and vue-tsc fail on
   gaps). Long-form content in `src/content/*.ts` as `Localized<T>`.
-- Contact form: Pages Function `functions/api/contact.ts` -> `src/contact/handler.ts` (Turnstile, then
-  Resend). Secrets only in Cloudflare env vars (see README).
+- Contact form: `worker/index.ts` (POST /api/contact) -> `src/contact/handler.ts` (Turnstile, then
+  Cloudflare Email Service via the `EMAIL` send_email binding). Pages Functions can't use send_email,
+  which is why the site is a Worker with static assets, not a Pages project. Secrets are Worker
+  secrets (see README); `VITE_TURNSTILE_SITE_KEY` is a build variable.
 - Hero: `src/hero/` - `machine.ts` (pure, tested state), `stitchPath.ts`, `buildMachine.ts` (Three.js
   objects, stitches merged into two meshes revealed by draw range), `HoopScene.vue`/`HoopCanvas.vue`
   (TresJS), `HeroHoop.vue` (SVG stand-in in the prerendered HTML; 3D loads after `load` + idle).
@@ -48,5 +50,6 @@ its source code have to prove her **Vue** skills.
   Lighthouse cost (TBT ~270 ms on simulated mobile).
 - Fonts: only the Latin Bricolage + Figtree files are preloaded (App.vue); beasties font preloading
   is off. Link previews use `public/og-image.png` (source: `scripts/og-image.html`).
-- Hosting: Cloudflare Pages, push to `main` = live. Public repo `CleriseSwart/builtbyclerise`.
+- Hosting: Cloudflare Worker with static assets (`wrangler.jsonc`), Workers Builds: push to `main` =
+  live. Public repo `CleriseSwart/builtbyclerise`.
 - Local Node is 24.13; some deps want >= 24.15 (warnings only). CI uses the latest Node 24.

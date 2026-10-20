@@ -1,7 +1,5 @@
-# Secrets for the contact Pages Function when running `npx wrangler pages dev dist`.
-# Copy to .dev.vars (git-ignored). In production set these in Cloudflare Pages > Settings > Variables.
+# Local secrets for `npx wrangler dev` (copy to .dev.vars, which is git-ignored).
+# In production set these as Worker secrets in the Cloudflare dashboard.
 CONTACT_TO=you@example.com
-CONTACT_FROM=Built by Clérise <hello@builtbyclerise.co.za>
-RESEND_API_KEY=re_xxxxxxxx
 # Cloudflare's "always passes" test secret
 TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA

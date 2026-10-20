@@ -1,11 +1,10 @@
 import { describe, expect, it, vi } from 'vitest'
 
-import { type ContactEnv, handleContact } from './handler'
+import { type ContactEnv, handleContact, type OutgoingMail } from './handler'
 
 const env: ContactEnv = {
   CONTACT_TO: 'inbox@example.com',
-  CONTACT_FROM: 'Site <hello@example.com>',
-  RESEND_API_KEY: 're_test',
+  CONTACT_FROM: 'hello@example.com',
   TURNSTILE_SECRET_KEY: 'secret',
 }
 
@@ -23,35 +22,38 @@ const post = (body: unknown) =>
     body: JSON.stringify(body),
   })
 
-/** A fetch double: Turnstile answers `captcha`, Resend answers with `sendStatus`. */
-function fakeFetch({ captcha = true, sendStatus = 200 } = {}) {
-  return vi.fn(async (url: string | URL | Request) =>
-    String(url).includes('turnstile')
-      ? Response.json({ success: captcha })
-      : new Response('{}', { status: sendStatus }),
+/** Test doubles: Turnstile answers `captcha`; the mailer records mail or throws. */
+function fakes({ captcha = true, sendFails = false } = {}) {
+  const fetcher = vi.fn(async () =>
+    Response.json({ success: captcha }),
   ) as unknown as typeof fetch & ReturnType<typeof vi.fn>
+  const send = vi.fn(async (mail: OutgoingMail) => {
+    if (sendFails) throw Object.assign(new Error('nope'), { code: 'E_DELIVERY_FAILED' })
+    return mail
+  })
+  return { fetcher, send }
 }
 
 describe('handleContact', () => {
   it('verifies the captcha, then e-mails the message with reply-to set', async () => {
-    const fetcher = fakeFetch()
-    const response = await handleContact(post(message), env, fetcher)
+    const deps = fakes()
+    const response = await handleContact(post(message), env, deps)
 
     expect(response.status).toBe(200)
     expect(await response.json()).toEqual({ ok: true })
-    expect(fetcher).toHaveBeenCalledTimes(2)
-    const [url, init] = fetcher.mock.calls[1] as [string, RequestInit]
-    expect(url).toBe('https://api.resend.com/emails')
-    const email = JSON.parse(String(init.body))
-    expect(email.to).toEqual(['inbox@example.com'])
-    expect(email.reply_to).toBe('jan@example.com')
-    expect(email.subject).toContain('A project')
-    expect(email.text).toContain('Can you build us a shop?')
+    expect(deps.fetcher).toHaveBeenCalledOnce()
+    expect(deps.send).toHaveBeenCalledOnce()
+    const mail = deps.send.mock.calls[0]![0]
+    expect(mail.to).toBe('inbox@example.com')
+    expect(mail.from.email).toBe('hello@example.com')
+    expect(mail.replyTo).toEqual({ email: 'jan@example.com', name: 'Jan Smit' })
+    expect(mail.subject).toContain('A project')
+    expect(mail.text).toContain('Can you build us a shop?')
   })
 
   it('returns field errors without calling any service', async () => {
-    const fetcher = fakeFetch()
-    const response = await handleContact(post({ ...message, email: 'nope' }), env, fetcher)
+    const deps = fakes()
+    const response = await handleContact(post({ ...message, email: 'nope' }), env, deps)
 
     expect(response.status).toBe(400)
     expect(await response.json()).toEqual({
@@ -59,33 +61,35 @@ describe('handleContact', () => {
       error: 'invalid',
       errors: { email: 'invalid' },
     })
-    expect(fetcher).not.toHaveBeenCalled()
+    expect(deps.fetcher).not.toHaveBeenCalled()
+    expect(deps.send).not.toHaveBeenCalled()
   })
 
   it('refuses when the captcha fails', async () => {
-    const response = await handleContact(post(message), env, fakeFetch({ captcha: false }))
+    const deps = fakes({ captcha: false })
+    const response = await handleContact(post(message), env, deps)
     expect(response.status).toBe(403)
     expect(await response.json()).toEqual({ ok: false, error: 'captcha' })
+    expect(deps.send).not.toHaveBeenCalled()
   })
 
   it('reports a failed send', async () => {
-    const response = await handleContact(post(message), env, fakeFetch({ sendStatus: 500 }))
+    vi.spyOn(console, 'error').mockImplementation(() => {})
+    const response = await handleContact(post(message), env, fakes({ sendFails: true }))
     expect(response.status).toBe(502)
+    expect(await response.json()).toEqual({ ok: false, error: 'send' })
   })
 
   it('quietly drops honeypot submissions', async () => {
-    const fetcher = fakeFetch()
-    const response = await handleContact(
-      post({ ...message, website: 'spam.example' }),
-      env,
-      fetcher,
-    )
+    const deps = fakes()
+    const response = await handleContact(post({ ...message, website: 'spam.example' }), env, deps)
     expect(await response.json()).toEqual({ ok: true })
-    expect(fetcher).not.toHaveBeenCalled()
+    expect(deps.fetcher).not.toHaveBeenCalled()
+    expect(deps.send).not.toHaveBeenCalled()
   })
 
   it('fails closed when a secret is missing', async () => {
-    const response = await handleContact(post(message), { ...env, RESEND_API_KEY: '' }, fakeFetch())
+    const response = await handleContact(post(message), { ...env, CONTACT_TO: '' }, fakes())
     expect(response.status).toBe(500)
   })
 })

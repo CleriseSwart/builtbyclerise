@@ -1,15 +1,29 @@
 // The contact endpoint's logic, kept free of Cloudflare types so it can be unit-tested.
-// functions/api/contact.ts wires it to Cloudflare Pages.
+// worker/index.ts wires it to the Worker: Turnstile over fetch, e-mail through Cloudflare Email Service.
 
 import { type ContactErrors, type ContactMessage, validateContact } from './validate'
 
 export interface ContactEnv {
-  /** Where messages go (Clérise's inbox). Set in Cloudflare, never in code. */
+  /** Where messages go (Clérise's inbox). A Worker secret, never in code. */
   CONTACT_TO: string
-  /** Sender on a domain verified with Resend, e.g. "Built by Clérise <hello@builtbyclerise.co.za>". */
+  /** Sender on builtbyclerise.co.za, which is set up for Cloudflare Email Service. */
   CONTACT_FROM: string
-  RESEND_API_KEY: string
   TURNSTILE_SECRET_KEY: string
+}
+
+export interface OutgoingMail {
+  from: { email: string; name: string }
+  to: string
+  replyTo: { email: string; name: string }
+  subject: string
+  text: string
+}
+
+export interface ContactDeps {
+  /** Sends one e-mail; throws when it cannot. */
+  send: (mail: OutgoingMail) => Promise<unknown>
+  /** For the Turnstile check. */
+  fetcher?: typeof fetch
 }
 
 export type ContactResponse =
@@ -32,9 +46,9 @@ const json = (body: ContactResponse, status = 200) =>
 export async function handleContact(
   request: Request,
   env: ContactEnv,
-  fetcher: typeof fetch = fetch,
+  { send, fetcher = fetch }: ContactDeps,
 ): Promise<Response> {
-  if (!env.CONTACT_TO || !env.CONTACT_FROM || !env.RESEND_API_KEY || !env.TURNSTILE_SECRET_KEY) {
+  if (!env.CONTACT_TO || !env.CONTACT_FROM || !env.TURNSTILE_SECRET_KEY) {
     return json({ ok: false, error: 'config' }, 500)
   }
 
@@ -64,21 +78,18 @@ export async function handleContact(
   if (!verdict.success) return json({ ok: false, error: 'captcha' }, 403)
 
   const { name, email, topic, message } = result.data
-  const sent = await fetcher('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${env.RESEND_API_KEY}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      from: env.CONTACT_FROM,
-      to: [env.CONTACT_TO],
-      reply_to: email,
+  try {
+    await send({
+      from: { email: env.CONTACT_FROM, name: 'Built by Clérise' },
+      to: env.CONTACT_TO,
+      replyTo: { email, name },
       subject: `builtbyclerise.co.za · ${TOPIC_SUBJECT[topic]} · ${name}`,
       text: `${message}\n\n--\n${name} <${email}>\nTopic: ${TOPIC_SUBJECT[topic]}`,
-    }),
-  })
-  if (!sent.ok) return json({ ok: false, error: 'send' }, 502)
+    })
+  } catch (error) {
+    console.error('contact: send failed', error)
+    return json({ ok: false, error: 'send' }, 502)
+  }
 
   return json({ ok: true })
 }

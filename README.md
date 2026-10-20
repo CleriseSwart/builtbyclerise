@@ -4,7 +4,7 @@ The portfolio of **Clérise Swart**, software engineer. The site is part of the 
 repository is meant to be read.
 
 **Stack:** Vue 3 (`<script setup lang="ts">`), TypeScript (strict), Vite, vite-ssg, Tailwind CSS v4,
-vue-i18n, Unhead, Vitest. Hosted on Cloudflare Pages.
+vue-i18n, Unhead, TresJS, Vitest. Hosted on a Cloudflare Worker with static assets.
 
 ## What it does
 
@@ -18,17 +18,18 @@ vue-i18n, Unhead, Vitest. Hosted on Cloudflare Pages.
   placeholders and `t('…')` calls to keys that don't exist.
 - **Design direction "Stitched Systems".** Ink-navy linen, one raspberry thread. The monogram is a
   satin-stitch "C" generated from code (`src/utils/satin.ts`), the same path the home-page
-  embroidery machine will stitch.
+  embroidery machine stitches.
 - **A 3D embroidery machine in the hero.** TresJS renders the hoop; the machine itself is plain,
   tested state (`src/hero/machine.ts`). All stitches of a kind are merged into one mesh and revealed
   with a draw range, so 210 stitches cost two draw calls. The prerendered HTML carries an SVG stand-in;
   the 3D chunk loads after the page has loaded, pauses off screen and respects reduced motion.
 - **Content as typed data.** Case studies, the timeline and skills live in `src/content/` as
   `Localized<T>` objects, so a missing Afrikaans version is a compile error.
-- **A contact form without a backend server.** A Cloudflare Pages Function (`functions/api/contact.ts`)
-  checks a Turnstile token, validates with the same rules as the form (`src/contact/validate.ts`) and
-  sends the message through Resend. The handler is plain TypeScript with an injectable `fetch`, so it
-  is unit-tested without Cloudflare.
+- **A contact form without a backend server.** A small Cloudflare Worker (`worker/index.ts`) answers
+  `POST /api/contact`: it checks a Turnstile token, validates with the same rules as the form
+  (`src/contact/validate.ts`) and sends the message with Cloudflare Email Service. Everything else is
+  served straight from the static assets. The handler is plain TypeScript with the mailer and
+  `fetch` injected, so it is unit-tested without Cloudflare.
 
 ## Structure
 
@@ -47,7 +48,8 @@ src/
   contact/             form validation and the contact endpoint handler
   hero/                the embroidery-machine hero (state, geometry, TresJS scene)
   utils/satin.ts       satin-stitch geometry
-functions/api/         Cloudflare Pages Functions (POST /api/contact)
+worker/index.ts        the Cloudflare Worker: /api/contact, everything else from dist/
+wrangler.jsonc         Worker config: assets, Email Service binding, variables
 public/                favicon, robots.txt, Cloudflare _redirects and _headers
 ```
 
@@ -55,33 +57,32 @@ Tests sit next to the code they cover (`*.test.ts`).
 
 ## Scripts
 
-| Command           | What it does                                             |
-| ----------------- | -------------------------------------------------------- |
-| `npm run dev`     | Dev server on http://localhost:5173                      |
-| `npm run build`   | Translation check, typecheck, prerender to `dist/`       |
-| `npm run preview` | Serve `dist/`                                            |
-| `npm test`        | Vitest unit and component tests                          |
-| `npm run check`   | Everything CI runs: i18n, typecheck, lint, format, tests |
-| `npm run lint`    | ESLint with fixes (`lint:check` to only report)          |
-| `npm run format`  | Prettier (`format:check` to only report)                 |
+| Command                  | What it does                                             |
+| ------------------------ | -------------------------------------------------------- |
+| `npm run dev`            | Dev server on http://localhost:5173                      |
+| `npm run build`          | Translation check, typecheck, prerender to `dist/`       |
+| `npm run preview`        | Serve `dist/`                                            |
+| `npm run preview:worker` | Built site plus the Worker locally (`wrangler dev`)      |
+| `npm test`               | Vitest unit and component tests                          |
+| `npm run check`          | Everything CI runs: i18n, typecheck, lint, format, tests |
+| `npm run lint`           | ESLint with fixes (`lint:check` to only report)          |
+| `npm run format`         | Prettier (`format:check` to only report)                 |
 
 Requires Node 24.
 
 ## Deployment
 
-Cloudflare Pages builds `main` on every push: build command `npm run build`, output directory
-`dist`. GitHub Actions runs the same checks on every push and pull request.
+A Cloudflare Worker with static assets, connected to this repository (Workers Builds): every push to
+`main` runs `npm run build` and `npx wrangler deploy`. GitHub Actions runs the same checks on every
+push and pull request.
 
-Environment variables (Cloudflare Pages > Settings > Variables):
+| Name                      | Kind             | What                                                  |
+| ------------------------- | ---------------- | ----------------------------------------------------- |
+| `VITE_TURNSTILE_SITE_KEY` | build variable   | Turnstile site key (public, baked into the page)      |
+| `TURNSTILE_SECRET_KEY`    | Worker secret    | Turnstile secret                                      |
+| `CONTACT_TO`              | Worker secret    | Inbox that receives the messages                      |
+| `CONTACT_FROM`            | `wrangler.jsonc` | Sender address on the domain set up for Email Service |
 
-| Name                      | Where    | What                                    |
-| ------------------------- | -------- | --------------------------------------- |
-| `VITE_TURNSTILE_SITE_KEY` | build    | Turnstile site key (public)             |
-| `TURNSTILE_SECRET_KEY`    | function | Turnstile secret                        |
-| `RESEND_API_KEY`          | function | Resend API key                          |
-| `CONTACT_FROM`            | function | Sender on a domain verified with Resend |
-| `CONTACT_TO`              | function | Inbox that receives the messages        |
-
-Locally, copy `.env.example` to `.env.local` and `.dev.vars.example` to `.dev.vars`, then run
-`npm run build && npx wrangler pages dev dist` to try the form end to end. Without them the form
-uses Cloudflare's always-pass Turnstile test key.
+Locally, copy `.dev.vars.example` to `.dev.vars` and run `npm run build && npm run preview:worker`.
+The form then works end to end with Cloudflare's always-pass Turnstile test keys, and Wrangler saves
+outgoing e-mail under `.wrangler/tmp` instead of sending it.
