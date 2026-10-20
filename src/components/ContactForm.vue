@@ -79,24 +79,34 @@ async function submit() {
   if (!result.ok) return
 
   state.value = 'sending'
+  let response: Response
   try {
-    const response = await fetch('/api/contact', {
+    response = await fetch('/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...result.data, website: form.website, token: token.value }),
     })
-    const body = (await response.json()) as ContactResponse
-    if (body.ok) {
-      state.value = 'sent'
-      return
-    }
-    if (body.error === 'invalid') errors.value = body.errors
-    failure.value = body.error === 'captcha' ? 'captcha' : 'send'
-    state.value = 'error'
   } catch {
+    // Only a request that never got an answer is a connection problem.
     failure.value = 'network'
     state.value = 'error'
+    resetCaptcha()
+    return
   }
+
+  // Anything that is not our JSON (an error page from a proxy, say) counts as a failed send.
+  const body = (await response.json().catch(() => null)) as ContactResponse | null
+  if (body?.ok) {
+    state.value = 'sent'
+    return
+  }
+  if (body?.error === 'invalid') errors.value = body.errors
+  failure.value = body?.error === 'captcha' ? 'captcha' : 'send'
+  state.value = 'error'
+  resetCaptcha()
+}
+
+function resetCaptcha() {
   if (widgetId) window.turnstile?.reset(widgetId)
   token.value = ''
 }

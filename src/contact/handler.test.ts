@@ -69,8 +69,9 @@ describe('handleContact', () => {
   })
 
   it('reports a failed send', async () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {})
     const response = await handleContact(post(message), env, fakeFetch({ sendStatus: 500 }))
-    expect(response.status).toBe(502)
+    expect(response.status).toBe(500)
   })
 
   it('quietly drops honeypot submissions', async () => {

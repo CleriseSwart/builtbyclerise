@@ -78,7 +78,15 @@ export async function handleContact(
       text: `${message}\n\n--\n${name} <${email}>\nTopic: ${TOPIC_SUBJECT[topic]}`,
     }),
   })
-  if (!sent.ok) return json({ ok: false, error: 'send' }, 502)
+  if (!sent.ok) {
+    // Visible in the Pages Functions logs. Not 502: Cloudflare swaps that for its own HTML error page.
+    console.error(
+      'contact: Resend refused the message',
+      sent.status,
+      await sent.text().catch(() => ''),
+    )
+    return json({ ok: false, error: 'send' }, 500)
+  }
 
   return json({ ok: true })
 }
