@@ -26,7 +26,7 @@ const domain = computed(() => props.study.links.en[0]?.href.replace(/^https?:\/\
     class="card group relative w-[300px] max-w-full rounded-2xl bg-chalk p-2.5 text-ink transition-transform duration-300 motion-reduce:transition-none"
     :style="{ '--tilt': `${tilt ?? 0}deg` }"
   >
-    <div class="grid h-full gap-3 rounded-[10px] bg-ink p-3.5 text-chalk">
+    <div class="flex h-full flex-col gap-3 rounded-[10px] bg-ink p-3.5 text-chalk">
       <div class="flex items-baseline justify-between gap-2.5">
         <h3 class="text-[21px] font-bold [font-stretch:85%]">
           <!-- The whole card is the link (see ::after below). -->
@@ -54,7 +54,7 @@ const domain = computed(() => props.study.links.en[0]?.href.replace(/^https?:\/\
         </div>
       </dl>
       <div
-        class="flex justify-between border-t border-dashed border-seam pt-2 font-mono text-[10px] tracking-[0.06em] text-fog"
+        class="mt-auto flex justify-between border-t border-dashed border-seam pt-2 font-mono text-[10px] tracking-[0.06em] text-fog"
       >
         <span>{{ domain }}</span>
         <span>{{ copy.status }}</span>

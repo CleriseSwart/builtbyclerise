@@ -28,14 +28,15 @@ const side = computed(() => sideWork[locale.value])
 
     <section class="grid gap-10">
       <SectionHeading :label="t('work.caseLabel')" :heading="t('home.workHeading')" />
-      <div class="flex flex-wrap justify-center gap-x-12 gap-y-14">
+      <!-- Subgrid: both cards share the first row (same height), their taglines the second. -->
+      <div class="grid grid-cols-[repeat(auto-fit,300px)] justify-center gap-x-12 gap-y-5">
         <div
           v-for="(study, i) in caseStudyList"
           :key="study.slug"
-          class="grid w-[300px] max-w-full content-start justify-items-center gap-5"
+          class="row-span-2 grid max-w-full grid-rows-subgrid justify-items-center"
         >
           <ProjectCard :study="study" :tilt="i % 2 ? 1.5 : -2" />
-          <p class="text-center text-fog">{{ study.copy[locale].tagline }}</p>
+          <p class="mb-8 text-center text-fog">{{ study.copy[locale].tagline }}</p>
         </div>
       </div>
     </section>
