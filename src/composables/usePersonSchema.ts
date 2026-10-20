@@ -1,6 +1,6 @@
 import { useHead } from '@unhead/vue'
 
-import { GITHUB_URL, LINKEDIN_URL } from '@/content/career'
+import { EMAIL, GITHUB_URL, LINKEDIN_URL } from '@/content/career'
 import { SITE_URL } from '@/site'
 
 /** schema.org Person (JSON-LD) for the home and about pages. */
@@ -16,6 +16,7 @@ export function usePersonSchema() {
           name: 'Clérise Swart',
           jobTitle: 'Software Engineer',
           url: SITE_URL,
+          email: `mailto:${EMAIL}`,
           sameAs: [LINKEDIN_URL, GITHUB_URL],
           address: { '@type': 'PostalAddress', addressCountry: 'ZA' },
           knowsAbout: ['Vue.js', 'TypeScript', 'Laravel', 'PostgreSQL', 'Web development'],

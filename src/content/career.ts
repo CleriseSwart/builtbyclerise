@@ -299,6 +299,7 @@ export const sideWork: Localized<OtherWork[]> = {
   ],
 }
 
+export const EMAIL = 'cleriseswart@gmail.com'
 export const ETSY_URL = 'https://www.etsy.com/shop/SpottedMooDigitizing'
 export const LINKEDIN_URL = 'https://www.linkedin.com/in/cleriseswart'
 export const GITHUB_URL = 'https://github.com/CleriseSwart'
