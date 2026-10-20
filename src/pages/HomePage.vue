@@ -7,6 +7,7 @@ import { useLocalePath } from '@/composables/useLocalePath'
 import { usePageMeta } from '@/composables/usePageMeta'
 import { usePersonSchema } from '@/composables/usePersonSchema'
 import { caseStudyList } from '@/content/caseStudies'
+import HeroHoop from '@/hero/HeroHoop.vue'
 
 const { t } = useI18n()
 const { path } = useLocalePath()
@@ -22,25 +23,31 @@ const principles = [
 
 <template>
   <div class="grid gap-24 sm:gap-32">
-    <!-- The 3D hoop (TresJS) joins this hero in the next step. -->
-    <section class="grid gap-6 pt-12 sm:pt-20">
-      <p class="font-mono text-xs tracking-[0.1em] text-thread uppercase">
-        {{ t('home.eyebrow') }}
-      </p>
-      <h1
-        class="text-[clamp(3rem,7.4vw,5.75rem)] leading-[0.92] font-[750] tracking-[-0.02em] [font-stretch:82%]"
-      >
-        Clérise<br />Swart<span class="text-thread">.</span>
-      </h1>
-      <p class="max-w-[22ch] font-display text-[clamp(1.375rem,2.4vw,1.75rem)] leading-tight">
-        {{ t('home.lede') }}
-      </p>
-      <p class="max-w-[46ch] text-fog">{{ t('home.sub') }}</p>
-      <div class="flex flex-wrap items-center gap-3">
-        <RouterLink :to="path('work')" class="btn-thread">{{ t('home.ctaWork') }}</RouterLink>
-        <RouterLink :to="path('contact')" class="btn-stitch">{{ t('home.ctaContact') }}</RouterLink>
+    <section
+      class="grid items-center gap-10 pt-12 sm:pt-16 md:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]"
+    >
+      <div class="grid gap-6">
+        <p class="font-mono text-xs tracking-[0.1em] text-thread uppercase">
+          {{ t('home.eyebrow') }}
+        </p>
+        <h1
+          class="text-[clamp(3rem,7.4vw,5.75rem)] leading-[0.92] font-[750] tracking-[-0.02em] [font-stretch:82%]"
+        >
+          Clérise<br />Swart<span class="text-thread">.</span>
+        </h1>
+        <p class="max-w-[22ch] font-display text-[clamp(1.375rem,2.4vw,1.75rem)] leading-tight">
+          {{ t('home.lede') }}
+        </p>
+        <p class="max-w-[46ch] text-fog">{{ t('home.sub') }}</p>
+        <div class="flex flex-wrap items-center gap-3">
+          <RouterLink :to="path('work')" class="btn-thread">{{ t('home.ctaWork') }}</RouterLink>
+          <RouterLink :to="path('contact')" class="btn-stitch">{{
+            t('home.ctaContact')
+          }}</RouterLink>
+        </div>
+        <p class="status-dot text-sm text-fog">{{ t('home.status') }}</p>
       </div>
-      <p class="status-dot text-sm text-fog">{{ t('home.status') }}</p>
+      <HeroHoop />
     </section>
 
     <section class="grid gap-10">

@@ -47,6 +47,12 @@ export function usePageMeta(page: PagePath | null, meta: MetaKey | (() => PageMe
         { property: 'og:title', content: title },
         { property: 'og:description', content: copy.description },
         { property: 'og:locale', content: locale.value === 'af' ? 'af_ZA' : 'en_ZA' },
+        // public/og-image.png, generated from scripts/og-image.html
+        { property: 'og:image', content: `${SITE_URL}/og-image.png` },
+        { property: 'og:image:width', content: '1200' },
+        { property: 'og:image:height', content: '630' },
+        { property: 'og:image:alt', content: `${SITE_NAME}: ${copy.title}` },
+        { name: 'twitter:card', content: 'summary_large_image' },
         ...(url
           ? [{ property: 'og:url', content: url }]
           : [{ name: 'robots', content: 'noindex' }]),

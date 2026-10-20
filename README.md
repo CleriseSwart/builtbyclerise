@@ -19,6 +19,10 @@ vue-i18n, Unhead, Vitest. Hosted on Cloudflare Pages.
 - **Design direction "Stitched Systems".** Ink-navy linen, one raspberry thread. The monogram is a
   satin-stitch "C" generated from code (`src/utils/satin.ts`), the same path the home-page
   embroidery machine will stitch.
+- **A 3D embroidery machine in the hero.** TresJS renders the hoop; the machine itself is plain,
+  tested state (`src/hero/machine.ts`). All stitches of a kind are merged into one mesh and revealed
+  with a draw range, so 210 stitches cost two draw calls. The prerendered HTML carries an SVG stand-in;
+  the 3D chunk loads after the page has loaded, pauses off screen and respects reduced motion.
 - **Content as typed data.** Case studies, the timeline and skills live in `src/content/` as
   `Localized<T>` objects, so a missing Afrikaans version is a compile error.
 - **A contact form without a backend server.** A Cloudflare Pages Function (`functions/api/contact.ts`)
@@ -41,6 +45,7 @@ src/
                        usePersonSchema (JSON-LD)
   content/             case studies, timeline, skills (typed, both languages)
   contact/             form validation and the contact endpoint handler
+  hero/                the embroidery-machine hero (state, geometry, TresJS scene)
   utils/satin.ts       satin-stitch geometry
 functions/api/         Cloudflare Pages Functions (POST /api/contact)
 public/                favicon, robots.txt, Cloudflare _redirects and _headers

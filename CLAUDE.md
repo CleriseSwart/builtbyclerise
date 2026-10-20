@@ -41,5 +41,12 @@ its source code have to prove her **Vue** skills.
   gaps). Long-form content in `src/content/*.ts` as `Localized<T>`.
 - Contact form: Pages Function `functions/api/contact.ts` -> `src/contact/handler.ts` (Turnstile, then
   Resend). Secrets only in Cloudflare env vars (see README).
+- Hero: `src/hero/` - `machine.ts` (pure, tested state), `stitchPath.ts`, `buildMachine.ts` (Three.js
+  objects, stitches merged into two meshes revealed by draw range), `HoopScene.vue`/`HoopCanvas.vue`
+  (TresJS), `HeroHoop.vue` (SVG stand-in in the prerendered HTML; 3D loads after `load` + idle).
+  The TresJS chunk is ~230 KB gzip (TresJS pulls in all of three); it is the home page's only
+  Lighthouse cost (TBT ~270 ms on simulated mobile).
+- Fonts: only the Latin Bricolage + Figtree files are preloaded (App.vue); beasties font preloading
+  is off. Link previews use `public/og-image.png` (source: `scripts/og-image.html`).
 - Hosting: Cloudflare Pages, push to `main` = live. Public repo `CleriseSwart/builtbyclerise`.
 - Local Node is 24.13; some deps want >= 24.15 (warnings only). CI uses the latest Node 24.

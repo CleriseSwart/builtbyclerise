@@ -60,7 +60,10 @@
     "aboutLink": "Read my story",
     "contactHeading": "Hiring for Vue or full-stack?",
     "contactBody": "I am looking for a full-time role, remote from South Africa. Intermediate level, with room to lead.",
-    "contactLink": "Get in touch"
+    "contactLink": "Get in touch",
+    "hoop": {
+      "restitch": "Stitch it again in another thread colour"
+    }
   },
   "card": {
     "stack": "Stack",

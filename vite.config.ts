@@ -2,6 +2,7 @@ import { writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { fileURLToPath, URL } from 'node:url'
 
+import templateCompilerOptions from '@tresjs/core/template-compiler-options'
 import tailwindcss from '@tailwindcss/vite'
 import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
@@ -12,7 +13,8 @@ import { buildSitemap, prerenderPaths } from './src/site.ts'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [vue(), tailwindcss()],
+  // TresJS: let Vue treat <TresMesh>, <primitive> etc. as Three.js objects, not unknown components.
+  plugins: [vue({ ...templateCompilerOptions }), tailwindcss()],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
@@ -24,6 +26,8 @@ export default defineConfig({
     formatting: 'minify',
     // `flat`: /en/about -> en/about.html, /404 -> 404.html (what Cloudflare Pages expects).
     dirStyle: 'flat',
+    // Critical CSS is inlined; fonts are preloaded selectively in App.vue (not every unicode subset).
+    beastiesOptions: { preloadFonts: false, inlineFonts: false },
     includedRoutes: () => [...prerenderPaths(), '/404'],
     onFinished() {
       const outDir = fileURLToPath(new URL('./dist', import.meta.url))

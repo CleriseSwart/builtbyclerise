@@ -60,7 +60,10 @@
     "aboutLink": "Lees my storie",
     "contactHeading": "Soek jy iemand vir Vue of full-stack?",
     "contactBody": "Ek soek 'n voltydse rol, remote vanuit Suid-Afrika. Intermediêre vlak, met ruimte om te lei.",
-    "contactLink": "Kontak my"
+    "contactLink": "Kontak my",
+    "hoop": {
+      "restitch": "Stik dit weer in 'n ander draadkleur"
+    }
   },
   "card": {
     "stack": "Stack",
